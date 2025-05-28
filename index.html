@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNPSC Interactive Exam Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Overview: Text, cards for group navigation. Goal: Orient user. Method: HTML/Tailwind. Chart.js for exam stage comparison.
+        - Job Types: Text lists. Goal: Inform. Method: HTML.
+        - Eligibility: Text, tables, Unicode icons (🎓, 📜, ✓, 📏). Goal: Inform. Method: HTML.
+        - Exam Process: HTML/CSS timeline/steps, tables for patterns. Goal: Explain. Method: HTML/Tailwind.
+        - Syllabus: Collapsible accordions. Goal: Detail, manage density. Method: HTML/JS.
+        - Salary: Tables, Bar charts (Chart.js) for comparing minimum basic pay of representative posts within each group using data from report tables/text. Goal: Compare, Inform. Method: HTML, Chart.js.
+        - All content sourced from the TNPSC report. No SVG/Mermaid used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .smooth-scroll { scroll-behavior: smooth; }
+        .active-nav { background-color: #0284c7; color: white; } /* sky-600 */
+        .inactive-nav { background-color: #e5e7eb; color: #374151; } /* gray-200 text-gray-700 */
+        .section-title { font-size: 1.75rem; font-weight: 600; color: #334155; margin-bottom: 1rem; border-bottom: 2px solid #0ea5e9; padding-bottom: 0.5rem;} /* slate-700, sky-500 */
+        .subsection-title { font-size: 1.25rem; font-weight: 600; color: #475569; margin-top: 1.5rem; margin-bottom: 0.75rem; } /* slate-600 */
+        .content-card { background-color: white; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); margin-bottom:1.5rem;}
+        .accordion-button { background-color: #f3f4f6; border: 1px solid #d1d5db; padding: 0.75rem 1rem; width: 100%; text-align: left; font-weight: 500; border-radius: 0.375rem; display: flex; justify-content: space-between; align-items: center; }
+        .accordion-content { border: 1px solid #d1d5db; border-top: none; padding: 1rem; border-radius: 0 0 0.375rem 0.375rem; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+        th, td { border: 1px solid #d1d5db; padding: 0.75rem; text-align: left; font-size:0.9rem; }
+        th { background-color: #e5e7eb; font-weight:600;}
+        .chart-container { position: relative; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; background-color: #fff; padding:1rem; border-radius:0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); margin-bottom:1.5rem;}
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
+        .nav-button { padding: 0.75rem 1.5rem; border-radius: 0.375rem; font-weight: 500; transition: background-color 0.3s, color 0.3s; text-align: center; }
+        .highlight-box { background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; margin: 1rem 0; border-radius: 0.25rem;} /* amber-100, amber-500 */
+        .tab-content { display: none; }
+        .active-tab { display: block; }
+        .icon-style { display: inline-block; margin-right: 0.25rem; }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800 smooth-scroll">
+
+    <header class="bg-sky-700 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold mb-2 sm:mb-0">TNPSC Exam Interactive Guide</h1>
+            <nav id="main-nav" class="flex flex-wrap justify-center space-x-1 sm:space-x-2">
+                <button data-target="overview-section" class="nav-button active-nav">Overview</button>
+                <button data-target="group1-section" class="nav-button inactive-nav">Group 1</button>
+                <button data-target="group2-section" class="nav-button inactive-nav">Group 2 & 2A</button>
+                <button data-target="group3-section" class="nav-button inactive-nav">Group 3 & 3A</button>
+                <button data-target="group4-section" class="nav-button inactive-nav">Group 4</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6">
+        <section id="overview-section" class="tab-content active-tab">
+            <h2 class="section-title">TNPSC Examinations: An Overview</h2>
+            <div class="content-card">
+                <p class="mb-3">Welcome to the interactive guide for Tamil Nadu Public Service Commission (TNPSC) examinations. This application provides a comprehensive overview of the various TNPSC exam groups (Group 1, Group 2 & 2A, Group 3 & 3A, and Group 4), detailing job roles, eligibility, exam processes, syllabi, and salary structures. Use the navigation above to explore specific groups.</p>
+                <h3 class="subsection-title">About TNPSC</h3>
+                <p class="mb-2">The Tamil Nadu Public Service Commission (TNPSC) is a constitutional body responsible for recruiting personnel for various state government positions in Tamil Nadu through competitive examinations. Established in 1929 as the Madras Service Commission, it became TNPSC in 1970, making it India's first Provincial Public Service Commission. It operates under Articles 315 to 323 of the Constitution of India.</p>
+                <p class="mb-2">TNPSC's functions include advising the government on recruitment rules, appointments, promotions, transfers, and disciplinary matters. It also conducts departmental exams and oversees certain national defense-related admission exams.</p>
+
+                <h3 class="subsection-title">Categorization of TNPSC Exam Groups</h3>
+                <p class="mb-4">TNPSC exams are categorized into Groups (1, 2, 2A, 3, 3A, 4) which generally reflect the seniority, responsibility, and pay scales of the positions. This structure helps candidates align their aspirations and preparation strategies.</p>
+
+                <h3 class="subsection-title">Comparison of Exam Stages Across Groups</h3>
+                <p class="mb-3">The complexity and number of stages in the TNPSC examination process vary by group, reflecting the nature of the roles. Generally, higher groups involve more stages. The chart below illustrates the typical main stages for each group. Note that 'DV' refers to Document Verification and 'PT' refers to Physical Test where applicable.</p>
+                <div class="chart-container">
+                    <canvas id="examStagesChart"></canvas>
+                </div>
+                 <p class="text-sm text-slate-600 mt-2 text-center">Note: Group 2 interviews have been discontinued. Group 2A Mains is MCQ-based. Physical tests are applicable for specific posts in Group 1 and Group 4.</p>
+            </div>
+        </section>
+
+        <section id="group1-section" class="tab-content">
+            <h2 class="section-title">TNPSC Group 1: High-Ranking Administrative Services</h2>
+            <div class="content-card">
+                <p class="mb-4">This section provides detailed information about TNPSC Group 1 examinations, which are conducted to recruit candidates for the highest administrative and leadership positions within the Tamil Nadu state government. These roles involve significant policy-making and implementation responsibilities.</p>
+
+                <h3 class="subsection-title">Job Types and Roles</h3>
+                <p class="mb-2">Group 1 posts include prestigious roles such as:</p>
+                <ul class="list-disc list-inside mb-3 pl-4">
+                    <li>Deputy Collector</li>
+                    <li>Deputy Superintendent of Police (Category 1)</li>
+                    <li>Assistant Commissioner (Commercial Taxes)</li>
+                    <li>Assistant Director of Rural Development</li>
+                    <li>Assistant Conservator of Forests</li>
+                    <li>District Panchayat Officer, District Registrar, District Social Welfare Officer, etc.</li>
+                </ul>
+                <p>These roles span general administration, law enforcement, revenue, rural development, and specialized technical fields.</p>
+
+                <h3 class="subsection-title">Eligibility Criteria</h3>
+                <p><span class="icon-style">👤</span><strong>Age Limit (General):</strong> 21 - 32 years.</p>
+                <p class="mb-1"><span class="icon-style">👥</span><strong>Age Relaxation:</strong> Up to 39 years for SC/ST/MBC/BC/BCM (37 in some notifications). Specific relaxations for Ex-Servicemen, Persons with Disabilities. For Asst. Commissioner (Commercial Taxes) with B.L. degree, max 35 years.</p>
+                <p class="mb-1"><span class="icon-style">🎓</span><strong>Educational Qualification:</strong> A Bachelor's Degree from a UGC recognized university.</p>
+                <p class="mb-1"><span class="icon-style">📜</span><strong>Tamil Language Proficiency:</strong> Required (studied at SSLC/HSC/Degree or pass proficiency test post-appointment).</p>
+                <p class="mb-1"><span class="icon-style">📏</span><strong>Physical Qualification:</strong> Specific standards for posts like DSP, District Officer (Fire & Rescue).</p>
+                <p class="mb-1"><span class="icon-style">✓</span><strong>Character:</strong> Good moral character, no criminal record.</p>
+
+                <h3 class="subsection-title">Exam Process</h3>
+                <p class="mb-2">A three-stage process: Preliminary Exam, Main Written Exam, and Interview & Document Verification.</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr><th>Stage</th><th>Subjects/Papers</th><th>Type</th><th>Total Marks</th><th>Duration</th><th>Min. Qualifying (Reserved)</th><th>Min. Qualifying (Others)</th><th>Remarks</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Preliminary Exam</td><td>General Studies & Aptitude</td><td>Objective</td><td>300</td><td>3 hours</td><td>90</td><td>120</td><td>Qualifying only</td></tr>
+                            <tr><td>Main Exam - Paper I</td><td>Tamil Eligibility Test</td><td>Descriptive</td><td>100</td><td>3 hours</td><td>40</td><td>40</td><td>Qualifying; mandatory for Papers II-IV evaluation</td></tr>
+                            <tr><td>Main Exam - Paper II</td><td>General Studies I</td><td>Descriptive</td><td>250</td><td>3 hours</td><td rowspan="3">255 (combined for Papers II, III, IV)</td><td rowspan="3">340 (combined for Papers II, III, IV)</td><td rowspan="3">Marks considered for final selection</td></tr>
+                            <tr><td>Main Exam - Paper III</td><td>General Studies II</td><td>Descriptive</td><td>250</td><td>3 hours</td></tr>
+                            <tr><td>Main Exam - Paper IV</td><td>General Studies III</td><td>Descriptive</td><td>250</td><td>3 hours</td></tr>
+                            <tr><td>Interview</td><td>Personality Test</td><td>Oral</td><td>100</td><td>-</td><td>-</td><td>-</td><td>Marks considered for final selection</td></tr>
+                            <tr><td><strong>Final Selection</strong></td><td colspan="2"><strong>Mains (Papers II,III,IV) + Interview</strong></td><td><strong>850</strong></td><td>-</td><td>-</td><td>-</td><td>Based on combined score</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="subsection-title">Detailed Syllabus</h3>
+                <div class="accordion-container">
+                    <button class="accordion-button">Preliminary Exam Syllabus <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                        <p class="font-semibold">General Studies (Degree Standard):</p>
+                        <ul class="list-disc list-inside pl-4 mb-2">
+                            <li>Unit I: General Science</li>
+                            <li>Unit II: Geography of India</li>
+                            <li>Unit III: History, Culture of India, and Indian National Movement</li>
+                            <li>Unit IV: Indian Polity</li>
+                            <li>Unit V: Indian Economy and Development Administration in Tamil Nadu</li>
+                            <li>Unit VI: History, Culture, Heritage, and Socio-Political Movements in Tamil Nadu</li>
+                        </ul>
+                        <p class="font-semibold">Aptitude & Mental Ability Test (SSLC Standard):</p>
+                        <ul class="list-disc list-inside pl-4">
+                            <li>Simplification, Percentage, HCF, LCM, Ratio & Proportion, Simple/Compound Interest, Area, Volume, Time & Work, Logical Reasoning, Puzzles, Dice, Visual Reasoning, Alpha-Numeric Reasoning, Number Series.</li>
+                        </ul>
+                    </div>
+                    <button class="accordion-button mt-2">Main Written Exam Syllabus <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                        <ul class="list-disc list-inside pl-4">
+                            <li>Paper I: Compulsory Tamil Language Test (SSLC Standard)</li>
+                            <li>Papers II, III, IV (General Studies - Degree Standard): Modern History of India & Indian Culture; Social Issues in India & Tamil Nadu; Role & Impact of Science & Technology; Tamil Society – Culture & Heritage; Geography of India, Climate Change & Disaster Management; Indian Economy – Current Trends & Global Impact; Environment & Biodiversity.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Salary Structure and Allowances</h3>
+                <p class="mb-2">Group 1 posts offer attractive salaries (Pay Level 22: Rs. 56,100 to Rs. 2,05,700 as per recent scales). Initial in-hand salary approx. Rs. 60,000 - Rs. 70,000. Allowances include DA, HRA, CCA, Medical, etc.</p>
+                <p class="mb-2 text-sm text-slate-600">The chart below shows illustrative minimum basic pay for some Group 1 posts based on previously reported scales. Current pay scales are generally higher.</p>
+                <div class="chart-container">
+                    <canvas id="group1SalaryChart"></canvas>
+                </div>
+                 <div class="overflow-x-auto mt-4">
+                    <p class="font-semibold mb-2">Examples of Post-wise Salary (Older Scales from Report Table II.E):</p>
+                    <table>
+                        <thead><tr><th>Post Name</th><th>Salary Range (Basic Pay)</th></tr></thead>
+                        <tbody>
+                            <tr><td>Deputy Collector</td><td>Rs. 27,000-52,000</td></tr>
+                            <tr><td>Deputy Superintendent of Police (Category-1)</td><td>Rs. 21,000-47,000</td></tr>
+                            <tr><td>Assistant Commissioner (Commercial Taxes)</td><td>Rs. 21,000-47,000</td></tr>
+                            <tr><td>Assistant Conservator of Forests</td><td>Rs. 26,000-51,000</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="group2-section" class="tab-content">
+            <h2 class="section-title">TNPSC Group 2 & 2A: Combined Civil Services Examination-II</h2>
+            <div class="content-card">
+                 <p class="mb-4">This section covers TNPSC Group 2 and Group 2A posts, which include a mix of administrative and subordinate roles. A key recent change is the discontinuation of interviews for Group 2 posts and different Mains exam formats for Group 2 (descriptive) and Group 2A (MCQ).</p>
+                 <div class="highlight-box">
+                    <p class="font-semibold">Important Update:</p>
+                    <ul class="list-disc list-inside pl-4">
+                        <li>Interviews for Group 2 posts have been discontinued. Selection is based on Mains marks only.</li>
+                        <li>Group 2 Mains: Descriptive Type.</li>
+                        <li>Group 2A Mains: MCQ Format.</li>
+                    </ul>
+                </div>
+                <h3 class="subsection-title">Job Types and Roles</h3>
+                <p class="font-semibold mb-1">Group 2 Posts (Examples - previously interview posts):</p>
+                <ul class="list-disc list-inside mb-3 pl-4">
+                    <li>Junior Employment Officer, Probation Officer, Assistant Inspector of Labour, Sub Registrar Grade-II, Special Assistants (Vigilance & Anti-Corruption).</li>
+                </ul>
+                <p class="font-semibold mb-1">Group 2A Posts (Examples - non-interview posts):</p>
+                <ul class="list-disc list-inside mb-3 pl-4">
+                    <li>Municipal Commissioner Grade-II, Assistant Section Officer (Secretariat, Law, Finance, TNPSC), Senior Inspector of Co-Operative Societies, Audit Inspector, Revenue Assistant, Personal Clerk, Steno-Typist.</li>
+                </ul>
+
+                <h3 class="subsection-title">Eligibility Criteria</h3>
+                <p><span class="icon-style">👤</span><strong>Age Limit (General):</strong> Typically 21 - 30 years (varies for certain posts like Sub-Registrar Grade-II: 20-30 years; Probation Officer: 22-40 years).</p>
+                <p class="mb-1"><span class="icon-style">👥</span><strong>Age Relaxation:</strong> No upper age limit for ST/SC/SCA/Destitute Widows/MBC/BC/BCM for many posts. Differently-abled: 10 years relaxation. Veterans: up to 48 years.</p>
+                <p class="mb-1"><span class="icon-style">🎓</span><strong>Educational Qualification:</strong> Graduation degree in any discipline from a recognized university. Some posts may have specific degree requirements (e.g., Law for certain Assistant Section Officer roles).</p>
+
+                <h3 class="subsection-title">Exam Process</h3>
+                <p class="mb-2">Two stages: Preliminary Exam and Main Written Exam.</p>
+                <p class="font-semibold">Preliminary Exam (Common for Group 2 & 2A):</p>
+                <ul class="list-disc list-inside mb-2 pl-4">
+                    <li>Type: Objective (200 questions, 300 marks, 3 hours)</li>
+                    <li>Sections: General Studies (75 Qs, Degree Std), Language (General Tamil/English - 100 Qs, SSLC Std), Aptitude & Mental Ability (25 Qs, SSLC Std).</li>
+                    <li>Min. Qualifying Marks: 90 for all categories.</li>
+                </ul>
+                <p class="font-semibold">Main Written Exam:</p>
+                <p class="italic">For Group 2 (Descriptive Type):</p>
+                <ul class="list-disc list-inside mb-2 pl-4">
+                    <li>Paper 1: Tamil Eligibility Test (SSLC Std, 100 marks, 3 hours, qualifying).</li>
+                    <li>Paper 2: General Studies (Degree Std, 300 marks, 3 hours, marks considered for selection).</li>
+                </ul>
+                <p class="italic">For Group 2A (MCQ Format):</p>
+                 <ul class="list-disc list-inside mb-2 pl-4">
+                    <li>Paper 1: Tamil Eligibility Test (SSLC Std, 100 marks, qualifying).</li>
+                    <li>Paper 2: General Studies (Degree Std, 150 marks), General Intelligence & Reasoning (SSLC Std, 60 marks), Language (General Tamil/English - SSLC Std, 90 marks). Total 200 MCQs, 1.5 marks each.</li>
+                </ul>
+
+                <h3 class="subsection-title">Detailed Syllabus</h3>
+                 <div class="accordion-container">
+                    <button class="accordion-button">Preliminary Exam Syllabus <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                        <p class="font-semibold">General Studies (Degree Standard):</p>
+                        <ul class="list-disc list-inside pl-4 mb-2">
+                            <li>General Science, Current Events, Geography of India, History & Culture of India, Indian Polity, Indian Economy, Indian National Movement, History, Culture, Heritage & Socio-Political Movements in Tamil Nadu, Development Administration in Tamil Nadu.</li>
+                        </ul>
+                        <p class="font-semibold">Language (General Tamil or General English - SSLC Standard)</p>
+                        <p class="font-semibold">Aptitude and Mental Ability (SSLC Standard)</p>
+                    </div>
+                    <button class="accordion-button mt-2">Main Exam Syllabus (Group 2 - Descriptive) <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                         <p class="font-semibold">Paper 1: Tamil Eligibility Test (SSLC Standard)</p>
+                         <p class="font-semibold mt-2">Paper 2: General Studies (Degree Standard):</p>
+                         <ul class="list-disc list-inside pl-4">
+                            <li>Modern History of India (ref: Tamil Nadu), Tamil Society – Culture & Heritage, Social Issues (ref: Tamil Nadu), Science & Technology in Development, Constitution, Polity & Governance (ref: Tamil Nadu), Geography of India, Environment, Biodiversity & Disaster Management (ref: Tamil Nadu), Indian Economy (ref: Tamil Nadu).</li>
+                         </ul>
+                    </div>
+                     <button class="accordion-button mt-2">Main Exam Syllabus (Group 2A - MCQ) <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                         <p class="font-semibold">Paper 1: Tamil Eligibility Test (SSLC Standard)</p>
+                         <p class="font-semibold mt-2">Paper 2:</p>
+                         <ul class="list-disc list-inside pl-4">
+                            <li>General Studies (Degree Standard)</li>
+                            <li>General Intelligence and Reasoning (SSLC Standard)</li>
+                            <li>Language (General Tamil or General English - SSLC Standard)</li>
+                         </ul>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Salary Structure and Allowances</h3>
+                <p class="mb-2">Salary range typically INR 37,200 to INR 117,600 (varies by post level, e.g., Level 8 to Level 19). Includes basic pay, DA, HRA, TA, Medical Allowance, Pension, etc.</p>
+                <div class="chart-container">
+                    <canvas id="group2SalaryChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="group3-section" class="tab-content">
+            <h2 class="section-title">TNPSC Group 3 & 3A: Combined Civil Services Examination-III</h2>
+            <div class="content-card">
+                <p class="mb-4">This section details Group 3 and 3A examinations, which recruit for specialized roles often requiring specific departmental knowledge or skills. These are generally single-stage written examinations.</p>
+
+                <h3 class="subsection-title">Job Types and Roles</h3>
+                <ul class="list-disc list-inside mb-3 pl-4">
+                    <li>Station Fire Officer</li>
+                    <li>Assistant Supervisor of Industrial Co-operative Societies</li>
+                    <li>Store Keeper (Employment and Training Dept. / Industries and Commerce Dept.)</li>
+                    <li>Junior Inspector of Co-operative Societies</li>
+                </ul>
+                <p>Responsibilities include tasks like managing cooperative societies, storekeeping, and fire station operations.</p>
+
+                <h3 class="subsection-title">Eligibility Criteria</h3>
+                <p><span class="icon-style">👤</span><strong>Age Limit:</strong> Min 18 years. Max for General: typically 32 years (e.g., for Jr. Inspector). Station Fire Officer: 20-30 years for all categories (no relaxation).</p>
+                <p class="mb-1"><span class="icon-style">👥</span><strong>Age Relaxation:</strong> For Jr. Inspector: up to 35 years for SC/ST/MBC/BC/BCM/DW. For Asst. Supervisor & Store Keeper: No max age limit for categories other than general.</p>
+                <p class="mb-1"><span class="icon-style">🎓</span><strong>Educational Qualification:</strong> Varies.
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Store-Keeper (Industries & Commerce): Pre-University or Higher Secondary.</li>
+                        <li>Jr. Inspector of Co-op Societies: Intermediate/Pre-University OR Commerce Degree OR Higher Diploma in Co-op Management. (SSLC for reserved categories with preference for higher qualifications).</li>
+                    </ul>
+                </p>
+                <p class="mb-1"><span class="icon-style">📏</span><strong>Physical Fitness:</strong> Certificate required, specific vision standards for some posts.</p>
+                <p class="mb-1"><span class="icon-style">📜</span><strong>Linguistic Qualification:</strong> Adequate knowledge of Tamil.</p>
+                <p class="mb-1">No prior work experience generally required.</p>
+
+                <h3 class="subsection-title">Exam Process</h3>
+                <p class="mb-2">Single-stage written examination. No negative marking. Total 300 marks, 3 hours.</p>
+                 <ul class="list-disc list-inside mb-2 pl-4">
+                    <li>Part A: Tamil Eligibility cum Scoring Test / General English (SSLC Level - 100 Qs, 150 marks).</li>
+                    <li>Part B: General Studies (75 Qs) + Aptitude & Mental Ability Test (SSLC Level - 25 Qs). Part B total 150 marks.</li>
+                </ul>
+
+
+                <h3 class="subsection-title">Detailed Syllabus</h3>
+                <div class="accordion-container">
+                    <button class="accordion-button">Group 3 Syllabus <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                        <p class="font-semibold">General Studies (Higher Secondary Standard):</p>
+                        <ul class="list-disc list-inside pl-4 mb-2">
+                            <li>General Science (Physics, Chemistry, Botany, Zoology)</li>
+                            <li>Current Events (National, International, TN specific)</li>
+                            <li>Geography (India, Universe)</li>
+                            <li>History and Culture of India and Tamil Nadu</li>
+                            <li>Indian Polity</li>
+                            <li>Indian Economy (and TN trends)</li>
+                            <li>Indian National Movement</li>
+                        </ul>
+                        <p class="font-semibold">Aptitude & Mental Ability Tests (SSLC Standard)</p>
+                        <p class="font-semibold">Tamil Language / General English (SSLC Level)</p>
+                         <ul class="list-disc list-inside pl-4">
+                            <li>Tamil: Social Issues, Socio-Political movements in TN, Tamil Society, TN Geography, Human Development in TN, Role of TN in freedom struggle, E-governance in TN.</li>
+                             <li>English: Figures of Speech, Poetry, Grammar, Vocabulary, Prose, Biographies.</li>
+                         </ul>
+                    </div>
+                </div>
+
+
+                <h3 class="subsection-title">Salary Structure and Allowances</h3>
+                <p class="mb-2">Typically Pay Level 10: Rs. 20,600 to Rs. 75,900. Allowances include DA, HRA, Medical, Pension, TA, CCA.</p>
+                <div class="chart-container">
+                    <canvas id="group3SalaryChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="group4-section" class="tab-content">
+            <h2 class="section-title">TNPSC Group 4: Entry-Level Posts</h2>
+            <div class="content-card">
+                <p class="mb-4">Group 4 examinations are the gateway to various entry-level administrative, clerical, and field positions in the Tamil Nadu government. These are highly sought-after roles due to their accessibility.</p>
+
+                <h3 class="subsection-title">Job Types and Roles</h3>
+                <ul class="list-disc list-inside mb-3 pl-4">
+                    <li>Junior Assistant (Security/Non-Security)</li>
+                    <li>Village Administrative Officer (VAO)</li>
+                    <li>Typist, Steno-typist (Grade-III)</li>
+                    <li>Bill Collector, Junior Revenue Inspector</li>
+                    <li>Forest Guard, Forest Watcher (and variations)</li>
+                    <li>Personal Clerk, Assistant, Field Assistant, Junior Executive (Office)</li>
+                </ul>
+                <p>These roles are spread across numerous departments like Ministerial Service, Judicial Service, Secretariat, Forest Department, etc.</p>
+
+                <h3 class="subsection-title">Eligibility Criteria</h3>
+                <p><span class="icon-style">🎓</span><strong>Educational Qualification:</strong> Pass in SSLC (Matriculation).</p>
+                <p class="mb-1"><span class="icon-style">👤</span><strong>Age Limit (General):</strong> 18 - 30 years (VAO: 21-30 years). Specific age limits for Forest posts.</p>
+                <p class="mb-1"><span class="icon-style">👥</span><strong>Age Relaxation:</strong> MBC/DC/BC: up to 32 years. SC/ST/DW: up to 35 years. No max age limit for certain categories for posts other than VAO, Forest Guard etc. if they possess higher than SSLC qualification.</p>
+                <p class="mb-1"><span class="icon-style">📜</span><strong>Technical Qualification:</strong> For Typist/Steno-typist: Pass in Government Technical Examination in Typewriting/Shorthand.</p>
+                <p class="mb-1"><span class="icon-style">📏</span><strong>Physical Requirements:</strong> Specific standards and endurance tests for Forest Guard/Watcher posts.</p>
+                <p class="mb-1"><span class="icon-style">✓</span><strong>Citizenship & Language:</strong> Indian citizen, proficient in Tamil.</p>
+
+                <h3 class="subsection-title">Exam Process</h3>
+                <p class="mb-2">Primarily a single-stage written examination, followed by document verification. Physical tests for Forest posts. No negative marking.</p>
+                <p class="font-semibold">Written Exam:</p>
+                 <ul class="list-disc list-inside mb-2 pl-4">
+                    <li>Mode: Offline, OMR based, Objective type.</li>
+                    <li>Duration: 3 hours. Total Marks: 300 (200 questions).</li>
+                    <li>Min. Qualifying Marks: 90 for all categories.</li>
+                    <li>Pattern:
+                        <ul class="list-disc list-inside ml-6">
+                            <li>Part A: Tamil Eligibility-cum-Scoring Test (SSLC Std - 100 Qs, 150 marks).</li>
+                            <li>Part B: General Studies (SSLC Std - 75 Qs) + Aptitude & Mental Ability Test (SSLC Std - 25 Qs). Part B total 150 marks.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Subsequent stages: Document Verification, Physical Certificate/Skill Verification, and Physical Standards Verification/Endurance Test (for specific posts).</p>
+
+                <h3 class="subsection-title">Detailed Syllabus</h3>
+                <div class="accordion-container">
+                    <button class="accordion-button">Group 4 Syllabus <span>▼</span></button>
+                    <div class="accordion-content hidden">
+                        <p class="font-semibold">Tamil Eligibility-cum-Scoring Test (SSLC Standard):</p>
+                        <ul class="list-disc list-inside pl-4 mb-2">
+                             <li>Grammar, Literature, Comprehension, Vocabulary.</li>
+                        </ul>
+                        <p class="font-semibold">General Studies (SSLC Standard):</p>
+                        <ul class="list-disc list-inside pl-4 mb-2">
+                            <li>General Science, Current Events, Geography (India & TN), History & Culture of India, Indian Polity, Indian Economy & Development Admin in TN, Indian National Movement, History, Culture, Heritage & Socio-Political Movements of Tamil Nadu.</li>
+                        </ul>
+                        <p class="font-semibold">Aptitude & Mental Ability Test (SSLC Standard):</p>
+                         <ul class="list-disc list-inside pl-4">
+                            <li>Simplification, Percentage, HCF, LCM, Ratio & Proportion, Simple/Compound Interest, Area, Volume, Time & Work, Logical Reasoning, Puzzles, Dice, Visual Reasoning, Alpha-Numeric Reasoning, Number Series.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Salary Structure and Allowances</h3>
+                <p class="mb-2">Basic salary starts around ₹19,500 (Level 8). Steno-Typist (Grade-III) at Level 10 (Rs. 20,600 – 75,900). Forest posts have different levels (e.g., Forest Guard Level 5: Rs. 18,200). Gross salary approx. ₹25,000 - ₹30,000. In-hand salary after deductions (PF, Tax) approx. ₹22,000 - ₹27,000. Allowances include DA, HRA, TA, Medical.</p>
+                <div class="chart-container">
+                    <canvas id="group4SalaryChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center p-4 mt-8 bg-slate-200 text-slate-600 text-sm">
+        <p>&copy; <span id="currentYear"></span> TNPSC Interactive Guide. Information based on publicly available TNPSC report data. Always refer to official TNPSC notifications for the most current and accurate details.</p>
+    </footer>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    const navButtons = document.querySelectorAll('#main-nav button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            navButtons.forEach(btn => {
+                btn.classList.remove('active-nav');
+                btn.classList.add('inactive-nav');
+            });
+            button.classList.add('active-nav');
+            button.classList.remove('inactive-nav');
+
+            const targetId = button.getAttribute('data-target');
+            tabContents.forEach(content => {
+                if (content.id === targetId) {
+                    content.classList.add('active-tab');
+                    content.classList.remove('hidden'); // Ensure it's not hidden if previously was
+                } else {
+                    content.classList.remove('active-tab');
+                    content.classList.add('hidden'); // Hide other tabs
+                }
+            });
+            // Ensure the overview section is displayed by default if no specific logic handled it
+            if (!document.querySelector('.active-tab')) {
+                document.getElementById('overview-section').classList.add('active-tab');
+                 document.getElementById('overview-section').classList.remove('hidden');
+            }
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+    
+    // Default active tab setup (redundant if first button is active-nav and first section active-tab)
+    //Ensures overview is active on load if JS runs after HTML parsing
+    if (!document.querySelector('.active-tab')) {
+        document.getElementById('overview-section').classList.add('active-tab');
+        document.getElementById('overview-section').classList.remove('hidden');
+        const overviewButton = document.querySelector('button[data-target="overview-section"]');
+        if(overviewButton){
+             navButtons.forEach(btn => {
+                btn.classList.remove('active-nav');
+                btn.classList.add('inactive-nav');
+            });
+            overviewButton.classList.add('active-nav');
+            overviewButton.classList.remove('inactive-nav');
+        }
+    }
+
+
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('span');
+            content.classList.toggle('hidden');
+            if (content.classList.contains('hidden')) {
+                arrow.textContent = '▼';
+            } else {
+                arrow.textContent = '▲';
+            }
+        });
+    });
+
+    const chartConfig = (labels, data, label, backgroundColor = 'rgba(2, 132, 199, 0.6)', borderColor = 'rgba(2, 132, 199, 1)') => ({ /* sky-600 */
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: data,
+                backgroundColor: backgroundColor,
+                borderColor: borderColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '₹' + value.toLocaleString('en-IN');
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 45,
+                        minRotation: 30,
+                         callback: function(value, index, values) {
+                            const label = this.getLabelForValue(value);
+                            if (label.length > 15) {
+                                return label.substring(0, 15) + '...';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += '₹' + context.parsed.y.toLocaleString('en-IN');
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+    
+    const renderChart = (canvasId, config) => {
+        const ctx = document.getElementById(canvasId)?.getContext('2d');
+        if (ctx) {
+            new Chart(ctx, config);
+        }
+    };
+
+    // Exam Stages Chart Data
+    const examStagesData = {
+        labels: ['Group 1', 'Group 2', 'Group 2A', 'Group 3/3A', 'Group 4'],
+        datasets: [{
+            label: 'Number of Main Exam Stages (approx.)',
+            data: [3, 2, 2, 1, 1], // Prelims, Mains, Interview (G1); Prelims, Mains (G2/2A); Written (G3/4)
+            backgroundColor: ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316', '#84cc16'], //sky, teal, indigo, orange, lime
+            borderColor: ['#0284c7', '#0d9488', '#4f46e5', '#ea580c', '#65a30d'],
+            borderWidth: 1
+        }]
+    };
+    renderChart('examStagesChart', {
+        type: 'bar', data: examStagesData, options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }, plugins: { legend: { display: false}, title: { display: true, text: 'Approx. Main Exam Stages per Group'} } }
+    });
+
+
+    // Group 1 Salary Chart
+    const group1SalaryLabels = ['Deputy Collector', 'DSP (Cat-1)', 'Asst. Comm. (CT)', 'Asst. Cons. Forests'];
+    const group1SalaryData = [27000, 21000, 21000, 26000]; // Minimum from older scales in report table II.E
+    renderChart('group1SalaryChart', chartConfig(group1SalaryLabels, group1SalaryData, 'Illustrative Min. Basic Pay (Older Scales)'));
+
+    // Group 2 Salary Chart
+    const group2SalaryLabels = [
+        'Industrial Co-op Off. (L19)', 
+        'Probation Off. (L18)', 
+        'Asst. Section Off. (L16)',
+        'Sr. Inspector Co-op (L12)',
+        'Revenue Asst. (L10)', 
+        'Exec. Officer G-II (L8)'
+    ];
+    const group2SalaryData = [37200, 36900, 36400, 35600, 20600, 19500];
+    renderChart('group2SalaryChart', chartConfig(group2SalaryLabels, group2SalaryData, 'Illustrative Min. Basic Pay by Level'));
+
+    // Group 3 Salary Chart
+    const group3SalaryLabels = ['Jr. Inspector Co-op (L10)', 'Store Keeper G-II (L10)', 'Store Keeper (Trg Wing L10)', 'Station Fire Off. (PB2)', 'Asst. Supervisor (PB1)'];
+    const group3SalaryData = [20600, 20600, 20600, 9300, 5200]; // Using minimum from pay band for PB posts
+    renderChart('group3SalaryChart', chartConfig(group3SalaryLabels, group3SalaryData, 'Illustrative Min. Basic Pay'));
+
+    // Group 4 Salary Chart
+    const group4SalaryLabels = ['Steno-Typist G-III (L10)', 'VAO / Jr. Asst. (L8)', 'Forest Guard (L5)', 'Forest Watcher (L3)'];
+    const group4SalaryData = [20600, 19500, 18200, 16600];
+    renderChart('group4SalaryChart', chartConfig(group4SalaryLabels, group4SalaryData, 'Illustrative Min. Basic Pay by Level'));
+
+</script>
+</body>
+</html>
